@@ -1,0 +1,40 @@
+.f2m-body,
+.f2m-body > .f2m-pnl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.f2m-figmaLogo {
+  width: 60px;
+}
+
+.f2m-figmaAuth button::after {
+  content: "Authorize";
+}
+
+.f2m-figmaAuth h3::after {
+  content: "Please authorize to Figma";
+}
+
+.f2m-figmaSource {
+  display: none;
+  margin-top: 68px;
+}
+
+.f2m-body[data-authStage="getToken"] .f2m-figmaAuth button::after {
+  content: "Update";
+}
+
+.f2m-body[data-authStage="getToken"] .f2m-figmaAuth h3::after {
+  content: "Update your connection to Figma";
+}
+
+.f2m-body[data-authStage="completed"] .f2m-figmaAuth {
+  display: none;
+}
+
+.f2m-body[data-authStage="completed"] .f2m-figmaSource {
+  display: flex;
+}
