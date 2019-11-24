@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      type="text/javascript"
+      src="https://miro.com/app/static/sdk.1.1.js"
+    ></script>
+    <script type="text/javascript" src="main.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://miro.com/app/static/styles.1.0.css"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body class="f2m-body">
+    <img class="f2m-figmaLogo" src="images/figma-1.svg" alt="" />
+    <div class="f2m-pnl f2m-figmaAuth">
+      <h3 class="miro-h3"></h3>
+      <button
+        class="miro-btn miro-btn--primary miro-btn--medium"
+        onclick="doFigmaAuth(this)"
+      ></button>
+    </div>
+    <div class="f2m-figmaSource">
+      <div class="miro-input-group miro-input-group--medium">
+        <input
+          type="text"
+          class="miro-input miro-input--primary"
+          placeholder="Document URL"
+        />
+        <button class="miro-btn miro-btn--primary" onclick="doMagic(this)">
+          Send to Miro
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
