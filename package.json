@@ -1,0 +1,12 @@
+{
+  "name": "Figma2Miro",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Elbidor/Figma2Miro",
+  "author": "Semyon Volkov <s.volkov@xsolla.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^6.7.0"
+  }
+}
