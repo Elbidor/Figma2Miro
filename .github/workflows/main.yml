@@ -8,5 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: action-yarn
+        uses: comchangs/action-yarn@v0.1-beta
+        with:
+          args: "yarn"
       - name: ESLint checks
-        uses: gimenete/eslint-action@1.0
+        uses: hallee/eslint-action@1.0.1

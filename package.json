@@ -1,0 +1,17 @@
+{
+  "name": "Figma2Miro",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Elbidor/Figma2Miro",
+  "author": "Semyon Volkov <s.volkov@xsolla.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^6.7.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  },
+  "scripts": {
+    "eslint": "eslint ./src/*.js"
+  }
+}
