@@ -29,10 +29,10 @@ async function doFigmaAuth() {
 }
 
 function getFigmaPageNode(accessToken, fileKey, pageNodeId) {
-  return fetch(`https://api.figma.com/v1/files/${fileKey}/nodes?ids=${pageNodeId}`, {
+  return fetch(`https://api.figma.com/v1/files/${fileKey}`, {
     method: 'GET',
     headers: {
-      "X-FIGMA-TOKEN": accessToken
+      "Authorization": `Bearer ${accessToken}`
     }
   })
     .then(response => response.json());
@@ -42,7 +42,7 @@ function getFigmaNodeImages(accessToken, fileKey, ids) {
   return fetch(`https://api.figma.com/v1/images/${fileKey}?ids=${ids}&format=svg`, {
     method: 'GET',
     headers: {
-      "X-FIGMA-TOKEN": accessToken
+      "Authorization": `Bearer ${accessToken}`
     }
   })
     .then(response => response.json())
@@ -65,24 +65,21 @@ async function doMagic(btn) {
   const pageNodeId = figmaFileParams[1]
     .replace(/^(.*?)node-id=/gs, "")
     .replace("%3A", ":");
-  let nodeChildrenIds = [];
 
   if (accessToken) {
-    console.log(accessToken);
-    let figmaPageNode = await getFigmaPageNode(accessToken, fileKey, pageNodeId);
-    iterateOverNodeChildren(figmaPageNode.nodes[pageNodeId].document, (node) => {
-      nodeChildrenIds.push(node.id);
-    });
-    let images = await getFigmaNodeImages(accessToken, fileKey, nodeChildrenIds.join());
+    // TO DO:
+    // 1) choose pages or multiple pages
+    // 2) image location (grid)
+    const figmaPageNode = await getFigmaPageNode(accessToken, fileKey, pageNodeId);
+    const pageTopNodes = figmaPageNode.document.children[0].children;
+    let images = await getFigmaNodeImages(accessToken, fileKey, pageTopNodes.map(node => node.id).join());
 
-    iterateOverNodeChildren(figmaPageNode.nodes[pageNodeId].document, (node) => {
+    figmaPageNode.document.children[0].children.forEach((node) => {
       miro.board.widgets.create({
-        x: node.absoluteBoundingBox.x,
-        y: node.absoluteBoundingBox.y,
         type: 'image',
         url: images[node.id],
-        title: `Test name: ${node.id}`
-      })
-    })
+        title: node.name
+      });
+    });
   }
 }
