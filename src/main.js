@@ -50,7 +50,7 @@ function getFigmaPageNode(accessToken, fileKey, pageNodeId) {
     },
   })
     .then((response) => {
-      if (response.code === 403) throw new Error('Bad token!');
+      if (response.status === 403) throw new Error('Bad token!');
       return response.json();
     })
     .catch((err) => badTokenHandler(err));
@@ -64,7 +64,7 @@ function getFigmaNodeImages(accessToken, fileKey, ids) {
     },
   })
     .then((response) => {
-      if (response.code === 403) throw new Error('Bad token!');
+      if (response.status === 403) throw new Error('Bad token!');
       const data = response.json();
       return data.images;
     })
