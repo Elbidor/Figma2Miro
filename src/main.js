@@ -49,7 +49,10 @@ function getFigmaPageNode(accessToken, fileKey, pageNodeId) {
       Authorization: `Bearer ${accessToken}`,
     },
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.status === 403) throw new Error('Bad token!');
+      return response.json();
+    })
     .catch((err) => badTokenHandler(err));
 }
 
@@ -60,8 +63,11 @@ function getFigmaNodeImages(accessToken, fileKey, ids) {
       Authorization: `Bearer ${accessToken}`,
     },
   })
-    .then((response) => response.json())
-    .then((data) => data.images)
+    .then((response) => {
+      if (response.status === 403) throw new Error('Bad token!');
+      const data = response.json();
+      return data.images;
+    })
     .catch((err) => badTokenHandler(err));
 }
 
