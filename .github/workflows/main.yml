@@ -13,4 +13,4 @@ jobs:
         with:
           args: "yarn"
       - name: ESLint checks
-        uses: hallee/eslint-action@1.0.1
+        uses: stefanoeb/eslint-action@1.0.0
