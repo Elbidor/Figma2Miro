@@ -29,6 +29,7 @@ function badTokenHandler(err) {
 async function doFigmaAuth() {
   const f2mModal = document.querySelector('.f2m-body');
   const authStage = f2mModal.getAttribute('data-authStage');
+  // eslint-disable-next-line no-undef
   const state = await miro.currentUser.getId();
   if (authStage && authStage === 'getToken') {
     fetch(`https://miro-auth-stage.herokuapp.com/postauth?state=${state}`)
