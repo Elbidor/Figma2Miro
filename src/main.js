@@ -6,7 +6,11 @@ miro.onReady(() => {
         title: 'Figma2Miro',
         svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
         onClick: () => {
-          miro.board.ui.openModal('figmaModal.html');
+          miro.board.ui.openModal('figmaModal.html',
+            {
+              width: 600,
+              height: 400,
+            });
         },
       },
     },
@@ -66,9 +70,9 @@ function getFigmaNodeImages(accessToken, fileKey, ids) {
   })
     .then((response) => {
       if (response.status === 403) throw new Error('Bad token!');
-      const data = response.json();
-      return data.images;
+      return response.json();
     })
+    .then((data) => data.images)
     .catch((err) => badTokenHandler(err));
 }
 
@@ -93,16 +97,18 @@ async function doMagic(btn) {
     // TO DO:
     // 1) choose pages or multiple pages
     // 2) image location (grid)
-    const figmaPageNode = await getFigmaPageNode(accessToken, fileKey, pageNodeId);
+    let figmaPageNode = await getFigmaPageNode(accessToken, fileKey, pageNodeId);
     const pageTopNodes = figmaPageNode.document.children[0].children;
     const images = await getFigmaNodeImages(accessToken, fileKey, pageTopNodes.map((node) => node.id).join());
 
-    figmaPageNode.document.children[0].children.forEach((node) => {
-      miro.board.widgets.create({
-        type: 'image',
-        url: images[node.id],
-        title: node.name,
-      });
-    });
+    figmaPageNode = figmaPageNode.document.children[0].children.map((node) => ({
+      type: 'image',
+      url: images[node.id],
+      title: node.name,
+      x: node.absoluteBoundingBox.x,
+      y: node.absoluteBoundingBox.y,
+    }));
+    miro.board.widgets.create(figmaPageNode);
+    miro.boar.ui.closeModal('figmaModal.html');
   }
 }
