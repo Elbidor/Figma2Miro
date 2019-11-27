@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 miro.onReady(() => {
   miro.initialize({
@@ -109,6 +110,6 @@ async function doMagic(btn) {
       y: node.absoluteBoundingBox.y,
     }));
     miro.board.widgets.create(figmaPageNode);
-    miro.boar.ui.closeModal('figmaModal.html');
+    miro.board.ui.closeModal('figmaModal.html');
   }
 }
