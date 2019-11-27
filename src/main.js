@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 miro.onReady(() => {
   miro.initialize({
@@ -58,7 +59,13 @@ function getFigmaPageNode(accessToken, fileKey, pageNodeId) {
       if (response.status === 403) throw new Error('Bad token!');
       return response.json();
     })
-    .catch((err) => badTokenHandler(err));
+    .catch((err) => {
+      if (err.message === 'Bad token!') {
+        badTokenHandler(err);
+      } else {
+        console.error(err);
+      }
+    });
 }
 
 function getFigmaNodeImages(accessToken, fileKey, ids) {
@@ -73,7 +80,11 @@ function getFigmaNodeImages(accessToken, fileKey, ids) {
       return response.json();
     })
     .then((data) => data.images)
-    .catch((err) => badTokenHandler(err));
+    .catch((err) => {
+      if (err.message === 'Bad token!') {
+        badTokenHandler(err);
+      }
+    });
 }
 
 function iterateOverNodeChildren(nodeTreeObject, operation) {
@@ -109,6 +120,6 @@ async function doMagic(btn) {
       y: node.absoluteBoundingBox.y,
     }));
     miro.board.widgets.create(figmaPageNode);
-    miro.boar.ui.closeModal('figmaModal.html');
+    miro.board.ui.closeModal('figmaModal.html');
   }
 }
