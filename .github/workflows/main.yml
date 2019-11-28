@@ -11,4 +11,4 @@ jobs:
       - name: ESLint checks
         uses: stefanoeb/eslint-action@1.0.0
         with:
-          args:  "src/**.js"
+          args:  "../../src/**.js"
