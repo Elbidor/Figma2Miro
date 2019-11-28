@@ -38,3 +38,8 @@
 .f2m-body[data-authStage="completed"] .f2m-figmaSource {
   display: flex;
 }
+
+.auth-error {
+  color: #d92929;
+  margin-top: 16px;
+}

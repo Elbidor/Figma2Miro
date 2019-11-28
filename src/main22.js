@@ -3,7 +3,7 @@ miro.onReady(() => {
   miro.initialize({
     extensionPoints: {
       bottomBar: {
-        title: 'Figma2Miro',
+        title: 'testsema',
         svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
         onClick: () => {
           miro.board.ui.openModal('figmaModal.html');
@@ -29,13 +29,21 @@ function badTokenHandler(err) {
 async function doFigmaAuth() {
   const f2mModal = document.querySelector('.f2m-body');
   const authStage = f2mModal.getAttribute('data-authStage');
+  const errorBox = document.querySelector('.auth-error');
+  errorBox.innerHTML = '';
   // eslint-disable-next-line no-undef
   const state = await miro.currentUser.getId();
   if (authStage && authStage === 'getToken') {
     fetch(`https://miro-auth-stage.herokuapp.com/postauth?state=${state}`)
       .then((response) => response.json())
-      .then((data) => localStorage.setItem('f2m-at', data.access_token));
-    f2mModal.setAttribute('data-authStage', 'completed');
+      .then((data) => {
+        localStorage.setItem('f2m-at', data.access_token);
+        f2mModal.setAttribute('data-authStage', 'completed');
+      })
+      .catch((err) => {
+        errorBox.innerHTML = 'Unexpected error while authorizing. Please try again later.';
+        f2mModal.removeAttribute('data-authStage');
+      });
   } else {
     const figmaAuthURL = `https://www.figma.com/oauth?client_id=OCNljv8VVPqctvRMUglYVu&redirect_uri=https://miro-auth-stage.herokuapp.com/oauth&scope=file_read&state=${state}&response_type=code`;
     window.open(figmaAuthURL);
@@ -95,7 +103,9 @@ async function doMagic(btn) {
     // 2) image location (grid)
     const figmaPageNode = await getFigmaPageNode(accessToken, fileKey, pageNodeId);
     const pageTopNodes = figmaPageNode.document.children[0].children;
-    const images = await getFigmaNodeImages(accessToken, fileKey, pageTopNodes.map((node) => node.id).join());
+    const images = await getFigmaNodeImages(accessToken,
+      fileKey,
+      pageTopNodes.map((node) => node.id).join());
 
     figmaPageNode.document.children[0].children.forEach((node) => {
       miro.board.widgets.create({
