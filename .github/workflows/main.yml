@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: NPM or Yarn install with caching
+        uses: bahmutov/npm-install@v1.1.0
       - name: ESLint checks
         uses: stefanoeb/eslint-action@1.0.0
         with:
