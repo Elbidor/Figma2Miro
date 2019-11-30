@@ -1,5 +1,5 @@
 .f2m-body,
-.f2m-body > .f2m-pnl {
+.f2m-body>.f2m-pnl {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,6 +23,13 @@
   margin-top: 68px;
 }
 
+.f2m-figmaSource .f2m-figmaSource_pagesPicker {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 16px;
+}
+
 .f2m-body[data-authStage="getToken"] .f2m-figmaAuth button::after {
   content: "Update";
 }
@@ -37,6 +44,7 @@
 
 .f2m-body[data-authStage="completed"] .f2m-figmaSource {
   display: flex;
+  flex-direction: column;
 }
 
 .auth-error {
