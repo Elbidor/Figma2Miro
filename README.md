@@ -14,10 +14,8 @@ Simply follow this <a href="https://github.com/savolkov/miro-auth-backend" targe
 - Usage of Miro API and Figma API
 
 ## How to build?
-- Run `npm install`
-- Run `npm run build` or `npm run watch` to compile app
-- Run _http-server_ in `dist` folder: `http-server -p 8081`
-- Open Miro and **enjoy**
+- Run `yarn`
+- Run _http-server_ to run locally
 
 ## Creators
 - <a href="https://github.com/savolkov" target="_blank">Volkov Semyon</a>
