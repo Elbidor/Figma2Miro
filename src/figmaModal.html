@@ -1,38 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script
-      type="text/javascript"
-      src="https://miro.com/app/static/sdk.1.1.js"
-    ></script>
-    <script type="text/javascript" src="main.js"></script>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://miro.com/app/static/styles.1.0.css"
-    />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-  </head>
-  <body class="f2m-body" onload="onLoadHandler()">
-    <img class="f2m-figmaLogo" src="images/figma-1.svg" alt="" />
-    <div class="f2m-pnl f2m-figmaAuth">
-      <h3 class="miro-h3"></h3>
-      <button
-        class="miro-btn miro-btn--primary miro-btn--medium"
-        onclick="doFigmaAuth(this)"
-      ></button>
+
+<head>
+  <script type="text/javascript" src="https://miro.com/app/static/sdk.1.1.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://miro.com/app/static/styles.1.0.css" />
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body class="f2m-body" onload="onLoadHandler()">
+  <img class="f2m-figmaLogo" src="images/figma-1.svg" alt="" />
+  <div class="f2m-pnl f2m-figmaAuth">
+    <h3 class="miro-h3"></h3>
+    <button class="miro-btn miro-btn--primary miro-btn--medium" onclick="doFigmaAuth(this)"></button>
+  </div>
+  <div class="f2m-figmaSource">
+    <div class="miro-input-group miro-input-group--medium">
+      <input type="text" class="miro-input miro-input--primary" placeholder="Document URL" />
+      <button class="miro-btn miro-btn--primary" onclick="doMagic(this)">
+        Send to Miro
+      </button>
     </div>
-    <div class="f2m-figmaSource">
-      <div class="miro-input-group miro-input-group--medium">
-        <input
-          type="text"
-          class="miro-input miro-input--primary"
-          placeholder="Document URL"
-        />
-        <button class="miro-btn miro-btn--primary" onclick="doMagic(this)">
-          Send to Miro
-        </button>
-      </div>
+    <div class="f2m-figmaSource_pagesPicker">
+      <label class="miro-toggle f2m-cb-allPages" onClick="togglePageCb(this)">
+        <input type="checkbox" checked>
+        <span>All pages</span>
+      </label>
+      <input class="miro-input miro-input--primary miro-input--small f2m-tb-pages" placeholder="Enter pages: 1, 2, 3..."
+        disabled>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
