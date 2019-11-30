@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-// miro.onReady(() => {
+miro.onReady(() => {
   miro.initialize({
     extensionPoints: {
       bottomBar: {
@@ -15,7 +15,7 @@
       },
     },
   });
-// });
+ });
 
 function togglePageCb(e) {
   e.preventDefault();
