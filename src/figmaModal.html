@@ -5,7 +5,7 @@
       type="text/javascript"
       src="https://miro.com/app/static/sdk.1.1.js"
     ></script>
-    <script type="text/javascript" src="main22.js"></script>
+    <script type="text/javascript" src="main.js"></script>
     <link
       rel="stylesheet"
       type="text/css"
@@ -31,8 +31,9 @@
           type="text"
           class="miro-input miro-input--primary"
           placeholder="Document URL"
+          oninput="onInputChangeHandler(this)"
         />
-        <button class="miro-btn miro-btn--primary" onclick="doMagic(this)">
+        <button class="miro-btn miro-btn--primary sendToMiro" onclick="doMagic(this)">
           Send to Miro
         </button>
       </div>

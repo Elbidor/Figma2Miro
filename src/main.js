@@ -3,7 +3,7 @@ miro.onReady(() => {
   miro.initialize({
     extensionPoints: {
       bottomBar: {
-        title: 'testsema',
+        title: 'Figma2Miro',
         svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
         onClick: () => {
           miro.board.ui.openModal('figmaModal.html');
@@ -12,6 +12,25 @@ miro.onReady(() => {
     },
   });
 });
+
+function validateFigmaFileUrl(url) {
+  if (!url) return false;
+  const regexp = new RegExp('^(?:https:\\/\\/)?(?:www\\.)?figma\\.com\\/(file|proto)\\/([0-9a-zA-Z]{22,128})(?:\\/([^\\?\\n\\r\\/]+)?((?:\\?[^\\/]*?node-id=([^&\\n\\r\\/]+))?[^\\/]*?)(\\/duplicate)?)?$');
+  return !!regexp.test(url);
+}
+
+function onInputChangeHandler(elem) {
+  console.log(elem);
+  const errorBox = document.querySelector('.auth-error');
+  const actionBtn = document.querySelector('.sendToMiro');
+  if (!validateFigmaFileUrl(elem.value)) {
+    errorBox.innerHTML = 'Please enter valid Figma URL.';
+    actionBtn.disabled = true;
+    return;
+  }
+  errorBox.innerHTML = '';
+  actionBtn.disabled = false;
+}
 
 function onLoadHandler() {
   if (localStorage.getItem('f2m-at')) {
