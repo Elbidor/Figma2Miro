@@ -17,8 +17,12 @@ miro.onReady(() => {
   });
 });
 
-function togglePageCb() {
-  document.querySelector('.f2m-tb-pages').toggleAttribute('disabled');
+function togglePageCb(e) {
+  e.preventDefault();
+  const tb = document.querySelector('.f2m-tb-pages');
+  const toggler = document.querySelector('.f2m-cb-allPages input');
+  tb.disabled = !tb.disabled;
+  toggler.checked = !toggler.checked;
 }
 
 function validateFigmaFileUrl(url) {
